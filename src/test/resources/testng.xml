@@ -1,0 +1,13 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="Online Banking">
+    <test name="E2E Flow">
+        <classes>
+            <class name="exercise.automation.testcases.RegisterTest"/>
+            <class name="exercise.automation.testcases.LoginTest"/>
+            <class name="exercise.automation.testcases.OverviewAccountsTest"/>
+            <class name="exercise.automation.testcases.AddNewAccountTest"/>
+            <class name="exercise.automation.testcases.TransferFundsTest"/>
+            <class name="exercise.automation.testcases.BillPayTest"/>
+        </classes>
+    </test>
+</suite>
