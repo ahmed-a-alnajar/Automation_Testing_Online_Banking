@@ -25,6 +25,7 @@ public class OverviewPage extends BasePage {
     By addNewAccountButton= By.cssSelector("#leftPanel ul a[href=\"openaccount.htm\"]");
     By transferFundsButton= By.cssSelector("#leftPanel ul a[href=\"transfer.htm\"]");
     By billPayButton= By.cssSelector("#leftPanel ul a[href=\"billpay.htm\"]");
+    By findTransButton= By.cssSelector("#leftPanel ul a[href=\"findtrans.htm\"]");
 
     public OverviewPage(WebDriver driver) {
         super(driver);
@@ -64,6 +65,12 @@ public class OverviewPage extends BasePage {
         setAccountsInfo();
         driver.findElement(billPayButton).click();
         return new BillPayPage(driver);
+    }
+
+    //    @Step("Click on the find transactions button")
+    public FindTransactionsPage clickFindTransButon(){
+        driver.findElement(findTransButton).click();
+        return new FindTransactionsPage(driver);
     }
 
 

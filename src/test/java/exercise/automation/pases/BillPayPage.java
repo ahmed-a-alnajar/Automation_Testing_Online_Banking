@@ -35,15 +35,15 @@ public class BillPayPage extends BasePage {
     public BillPayPage enterBillData(){
         wait.waitForVisibility(billFormBy);
 
-        driver.findElement(payeeNameBy).sendKeys("test");
-        driver.findElement(addressBy).sendKeys("test");
-        driver.findElement(cityBy).sendKeys("test");
-        driver.findElement(stateBy).sendKeys("test");
+        driver.findElement(payeeNameBy).sendKeys("STC Comp");
+        driver.findElement(addressBy).sendKeys("Saad St");
+        driver.findElement(cityBy).sendKeys("CTA");
+        driver.findElement(stateBy).sendKeys("Stat");
         driver.findElement(zCodeBy).sendKeys("45662");
         driver.findElement(phoneNumberBy).sendKeys("8546215479");
         driver.findElement(accountNumberBy).sendKeys("56452321");
         driver.findElement(verifyAccountBy).sendKeys("56452321");
-        driver.findElement(amountBy).sendKeys("100");
+        driver.findElement(amountBy).sendKeys("50");
         selectFromAccountId();
 
         return this;
@@ -82,7 +82,7 @@ public class BillPayPage extends BasePage {
         return backToOverview()
                 .billAmountDeducted(
                         getAccountId(),
-                        getAccountBalance()-100
+                        getAccountBalance()-50
                 );
     }
 

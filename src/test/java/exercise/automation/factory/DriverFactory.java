@@ -16,7 +16,7 @@ public class DriverFactory {
 
         switch (browser){
             case "CHROME":
-                WebDriverManager.chromedriver().setup();
+               // WebDriverManager.chromedriver().setup();
                 ChromeOptions chromeOptions = new ChromeOptions();
                 chromeOptions.addArguments("-incognito");
 //                chromeOptions.addArguments("--auto-open-devtools-for-tabs"); //Network inspect
@@ -24,7 +24,7 @@ public class DriverFactory {
                 driver.manage().window().maximize();
                 break;
             case "FIREFOX":
-                WebDriverManager.firefoxdriver().setup();
+                //WebDriverManager.firefoxdriver().setup();
                 FirefoxOptions fireOptions = new FirefoxOptions();
                 fireOptions.addArguments("-incognito");
                 driver = new FirefoxDriver(fireOptions);

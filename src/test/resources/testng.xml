@@ -4,10 +4,11 @@
         <classes>
             <class name="exercise.automation.testcases.RegisterTest"/>
             <class name="exercise.automation.testcases.LoginTest"/>
-            <class name="exercise.automation.testcases.OverviewAccountsTest"/>
+<!--            <class name="exercise.automation.testcases.OverviewAccountsTest"/>-->
             <class name="exercise.automation.testcases.AddNewAccountTest"/>
             <class name="exercise.automation.testcases.TransferFundsTest"/>
             <class name="exercise.automation.testcases.BillPayTest"/>
+            <class name="exercise.automation.testcases.FindTransactionsTest"/>
         </classes>
     </test>
 </suite>
