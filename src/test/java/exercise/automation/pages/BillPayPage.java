@@ -1,6 +1,5 @@
-package exercise.automation.pases;
+package exercise.automation.pages;
 
-import com.github.javafaker.Faker;
 import exercise.automation.base.BasePage;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;

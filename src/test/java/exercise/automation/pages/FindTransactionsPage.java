@@ -1,4 +1,4 @@
-package exercise.automation.pases;
+package exercise.automation.pages;
 
 import exercise.automation.base.BasePage;
 import io.qameta.allure.Step;

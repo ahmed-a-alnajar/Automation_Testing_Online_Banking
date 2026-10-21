@@ -1,6 +1,5 @@
-package exercise.automation.pases;
+package exercise.automation.pages;
 
-import com.github.dockerjava.core.dockerfile.DockerfileStatement;
 import exercise.automation.base.BasePage;
 import exercise.automation.utils.ConfigUtils;
 import io.qameta.allure.Step;
@@ -12,7 +11,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class OverviewPage extends BasePage {
 

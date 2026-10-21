@@ -1,10 +1,9 @@
 package exercise.automation.testcases;
 
 import exercise.automation.base.BaseTest;
-import exercise.automation.pases.FindTransactionsPage;
-import exercise.automation.pases.LoginPage;
-import exercise.automation.pases.OverviewPage;
-import exercise.automation.pases.TransferFundsPage;
+import exercise.automation.pages.FindTransactionsPage;
+import exercise.automation.pages.LoginPage;
+import exercise.automation.pages.OverviewPage;
 import exercise.automation.utils.ConfigUtils;
 import io.qameta.allure.Description;
 import io.qameta.allure.Feature;

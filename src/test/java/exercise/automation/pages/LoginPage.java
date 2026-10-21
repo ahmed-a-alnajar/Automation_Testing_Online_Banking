@@ -1,11 +1,10 @@
-package exercise.automation.pases;
+package exercise.automation.pages;
 
 import exercise.automation.base.BasePage;
 import exercise.automation.utils.ConfigUtils;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.testng.Assert;
 
 public class LoginPage extends BasePage {
 
