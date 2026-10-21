@@ -23,12 +23,10 @@ public class FindTransactionsPage extends BasePage {
     By amountSubmitButtonBy = By.cssSelector("#transactionForm button#findByAmount");
 
     //Transactions Table
-    By transTableBy= By.cssSelector("#transactionTable");
     By transTableDataBy= By.cssSelector("#transactionTable #transactionBody tr");
     By transDetailsButton = By.cssSelector("#transactionBody tr td:nth-child(2) a");
 
     //Transaction details
-    By transDetailsBy= By.cssSelector("#rightPanel .title");
     By transDetailsDataBy= By.cssSelector("#rightPanel table tr");
 
 
@@ -36,7 +34,7 @@ public class FindTransactionsPage extends BasePage {
         super(driver);
     }
 
-//    @Step("Select the transactions account")
+    @Step("Select the transactions account")
     public void selectAccount(By selectedAccount){
         wait.waitForVisibility(selectAccountBy);
         driver.findElement(selectAccountBy).click();
@@ -50,7 +48,7 @@ public class FindTransactionsPage extends BasePage {
     * * * Check the transactions count shown correctly
     * */
 
-//    @Step("Enter Date and submit filtration")
+    @Step("Enter Date and submit filtration")
     public FindTransactionsPage findByDate(){
         selectAccount(accountSecondOptionBy);
         driver.findElement(findByDateBy).sendKeys(todayDateFormate());
@@ -60,18 +58,18 @@ public class FindTransactionsPage extends BasePage {
     }
 
     public boolean transData(){
-        return isTrsnsDateMatched() && isTransCountMatched();
+        return isTransDateMatched() && isTransCountMatched();
     }
 
-//    @Step("Check the transactions date shown correctly")
-    public boolean isTrsnsDateMatched(){
+    @Step("Check the transactions date shown correctly")
+    public boolean isTransDateMatched(){
         return driver.findElements(transTableDataBy)
                 .stream()
                 .map(x -> x.findElement(By.cssSelector("td:nth-child(1)")).getText())
                 .allMatch(actualDate -> actualDate.equals(todayDateFormate()));
     }
 
-//    @Step("Check the transactions count shown correctly")
+    @Step("Check the transactions count shown correctly")
     public boolean isTransCountMatched(){
         wait.waitForVisibility(transTableDataBy);
         return driver.findElements(transTableDataBy).size() == 5;
@@ -85,7 +83,7 @@ public class FindTransactionsPage extends BasePage {
      * * * Check the transactions type shown correctly with sender and receiver accounts
      */
 
-    //    @Step("Enter amount and submit filtration")
+    @Step("Enter amount and submit filtration")
     public FindTransactionsPage findByAmount(String accountType, String amount){
 
         if (accountType.equals("sender")){ selectAccount(accountSecondOptionBy);
@@ -103,7 +101,7 @@ public class FindTransactionsPage extends BasePage {
                 && transactionsType(transType, expectedAmount);
     }
 
-    //    @Step("Check the transactions description shown correctly with sender and receiver accounts")
+    @Step("Check the transactions description shown correctly with sender and receiver accounts")
     public boolean transDescription(String transType){
         return driver.findElements(transTableDataBy)
                 .stream()
@@ -117,7 +115,7 @@ public class FindTransactionsPage extends BasePage {
                 });
     }
 
-//    @Step("Check the transactions type shown correctly with sender and receiver accounts")
+    @Step("Check the transactions type shown correctly with sender and receiver accounts")
     public boolean transactionsType(String transType, String expectedAmount){
         return driver.findElements(transTableDataBy)
                 .stream()
@@ -137,23 +135,19 @@ public class FindTransactionsPage extends BasePage {
     }
 
     //Check transactions details screen
-//    @Step("Click on the transaction details button")
+    @Step("Click on the transaction details button")
     public FindTransactionsPage clickTransDetailsButton(){
         wait.waitForVisibility(transTableDataBy);
         driver.findElement(transDetailsButton).click();
         return this;
     }
-//    @Step("Check that all transaction details shown as expected")
+
+    @Step("Check that all transaction details shown as expected")
     public boolean isAllDetailShownCorrectly(){
         wait.waitForVisibility(transDetailsDataBy);
         Map<String, String> actualTransDetails= getTransactionDetails();
         return isTransIdAndDateEmpty(actualTransDetails) && isTransDetailsMatched(actualTransDetails);
     }
-
-
-
-
-
 
     public String todayDateFormate(){
         LocalDate today = LocalDate.now();
@@ -195,7 +189,5 @@ public class FindTransactionsPage extends BasePage {
         }
         return details;
     }
-
-
 
 }

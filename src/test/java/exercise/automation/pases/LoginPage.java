@@ -32,7 +32,7 @@ public class LoginPage extends BasePage {
         return new RegisterPage(driver);
     }
 
-//    @Step("Add the login credentials")
+    @Step("Add the login credentials and Submit")
     public OverviewPage login(String pass){
         wait.waitForVisibility(loginFormBy);
         driver.findElement(userName).sendKeys(ConfigUtils.getInstance().getUserName());
@@ -42,6 +42,7 @@ public class LoginPage extends BasePage {
         return new OverviewPage(driver);
     }
 
+    @Step("Check the error message is shown")
     public String checkTheErrorMessage(){
         wait.waitForVisibility(loginErrorMessage);
         return driver.findElement(loginErrorMessage).getText();

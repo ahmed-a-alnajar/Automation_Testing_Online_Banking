@@ -30,12 +30,12 @@ public class TransferFundsPage extends BasePage {
         super(driver);
     }
 
-//    @Step("Enter the transfer amount")
+    @Step("Enter the transfer amount")
     public void enterTransferAmount(Double amount){
         driver.findElement(amountFieldBy).sendKeys(amount.toString());
     }
 
-//    @Step("Select the sender account id")
+    @Step("Select the sender account id")
     public void selectSenderAccountId(){
         driver.findElement(fromAccountFormBy).click();
         wait.waitForVisibility(fromAccountFormOptionBy);
@@ -44,7 +44,7 @@ public class TransferFundsPage extends BasePage {
         setFromAccountIdBalanceBeforeTransfer();
     }
 
-    //    @Step("Select the receiver account id")
+    @Step("Select the receiver account id")
     public void selectReceiverAccountId(){
         driver.findElement(toAccountFormBy).click();
         wait.waitForVisibility(toAccountFormOptionBy);
@@ -60,7 +60,7 @@ public class TransferFundsPage extends BasePage {
         return this;
     }
 
-//    @Step("Click on the transfer button")
+    @Step("Click on the transfer button")
     public TransferFundsPage clickTransferButton(String transType){
         Double amount= TransAmountBasedType(transType);
         setFromAccountIdBalanceAfterTransfer(amount);
@@ -71,13 +71,13 @@ public class TransferFundsPage extends BasePage {
         return this;
     }
 
-//    @Step("Check that the transfer success message is displayed")
+    @Step("Check that the transfer success message is displayed")
     public boolean checkTransSuccessMessage(){
         wait.waitForVisibility(showResultMessageBy);
         return driver.findElement(showResultMessageBy).isDisplayed();
     }
 
-//    @Step("Navigate to the overview page")
+    @Step("Navigate to the overview page")
     public OverviewPage backToOverview(){
         wait.waitForVisibility(showResultMessageBy);
         driver.findElement(overviewButton).click();
@@ -120,14 +120,8 @@ public class TransferFundsPage extends BasePage {
     public Double getFromAccountIdBalanceAfterTransfer() { return fromAccountIdBalanceAfterTransfer;}
     public Double getToAccountIdBalanceAfterTransfer() { return toAccountIdBalanceAfterTransfer;}
 
-    public static void setFromAccountId(String accID) {
-//        fromAccountId = driver.findElement(fromAccountBy).getText();
-        fromAccountId = accID;
-    }
-    public static void setToAccountId(String accID) {
-//        toAccountId = driver.findElement(toAccountBy).getText();
-        toAccountId = accID;
-    }
+    public static void setFromAccountId(String accID) { fromAccountId = accID; }
+    public static void setToAccountId(String accID) { toAccountId = accID; }
 
     public void setFromAccountIdBalanceBeforeTransfer() {
         this.fromAccountIdBalanceBeforeTransfer=

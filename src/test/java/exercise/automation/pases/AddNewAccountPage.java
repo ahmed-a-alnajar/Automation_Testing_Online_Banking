@@ -29,13 +29,14 @@ public class AddNewAccountPage extends BasePage {
         super(driver);
     }
 
-//    @Step("Check that all accounts in the account overview table are shown correctly while adding new account")
+    @Step("Check that all accounts in the account overview table are shown correctly while adding new account")
     public boolean checkAccountsIdsMatches(List<String> expectedAccountId){
         setAccountsIds();
          return IntStream.range(0, expectedAccountId.size())
                 .allMatch(i-> actualAccountsIds.get(i).equals(expectedAccountId.get(i)));
     }
 
+    @Step("Select the account type then submit")
     public AddNewAccountPage clickOpenNewAccountButton(){
         //Select account type from the accounts types list
         driver.findElement(accountTypeForm).click();
@@ -50,13 +51,13 @@ public class AddNewAccountPage extends BasePage {
         return this;
     }
 
-//    @Step("Check if the opened new account success message is displayed")
+    @Step("Check if the opened new account success message is displayed")
     public String checkOpenedAccountMessage(){
         wait.waitForVisibility(accountResultMessage);
         return driver.findElement(accountResultMessage).getText();
     }
 
-//    @Step("Navigate to the accounts overview page")
+    @Step("Navigate to the accounts overview page")
     public OverviewPage backToOverview(){
         setNewAccountId();
         driver.findElement(overviewButton).click();

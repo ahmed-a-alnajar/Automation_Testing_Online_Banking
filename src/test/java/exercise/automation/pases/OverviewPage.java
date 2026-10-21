@@ -31,6 +31,7 @@ public class OverviewPage extends BasePage {
         super(driver);
     }
 
+    @Step("Check that the user logged-in successfully")
     public boolean checkAccountsTableDisplayed(){
         wait.waitForVisibility(accountsTable);
         return driver.findElement(accountsTable).isDisplayed();
@@ -42,7 +43,7 @@ public class OverviewPage extends BasePage {
         return !accounts.isEmpty();
     }
 
-//    @Step("Click on the add new account button")
+    @Step("Click on the add new account button")
     public AddNewAccountPage clickOnAddNewAccount(){
         setAccountsInfo();
         setAccountsNumbers();
@@ -50,7 +51,7 @@ public class OverviewPage extends BasePage {
         return new AddNewAccountPage(driver);
     }
 
-    //    @Step("Click on the transfer funds button")
+    @Step("Click on the transfer funds button")
     public TransferFundsPage clickTransferFunds(){
         setAccountsInfo();
         if(accountsInfo.size() <=1){
@@ -60,21 +61,21 @@ public class OverviewPage extends BasePage {
         return new TransferFundsPage(driver);
     }
 
-//    @Step("Click on the bill pay button")
+    @Step("Click on the bill pay button")
     public BillPayPage clickBillPayButon(){
         setAccountsInfo();
         driver.findElement(billPayButton).click();
         return new BillPayPage(driver);
     }
 
-    //    @Step("Click on the find transactions button")
+    @Step("Click on the find transactions button")
     public FindTransactionsPage clickFindTransButon(){
         driver.findElement(findTransButton).click();
         return new FindTransactionsPage(driver);
     }
 
 
-//    @Step("Check that the new Accounts is added to the accounts overview table")
+    @Step("Check that the new Accounts is added to the accounts overview table")
     public boolean newAccountAddedToTable(String newAccountId){
         wait.waitForVisibility(accountsTable);
         List<WebElement> accounts= driver.findElements(accountsTable);
@@ -92,6 +93,7 @@ public class OverviewPage extends BasePage {
                 accountsInfo.get(toAcc).equals(toAmount);
     }
 
+    @Step("Check that the account balance deducted")
     public boolean billAmountDeducted(String accountId, Double newBalance){
         wait.waitForVisibility(accountsTable);
         setAccountsInfo();

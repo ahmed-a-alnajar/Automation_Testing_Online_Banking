@@ -2,6 +2,7 @@ package exercise.automation.pases;
 
 import com.github.javafaker.Faker;
 import exercise.automation.base.BasePage;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -31,7 +32,7 @@ public class BillPayPage extends BasePage {
         super(driver);
     }
 
-//    @Step("Enter the bill pay information")
+    @Step("Enter the bill pay information")
     public BillPayPage enterBillData(){
         wait.waitForVisibility(billFormBy);
 
@@ -49,7 +50,7 @@ public class BillPayPage extends BasePage {
         return this;
     }
 
-//    @Step("Select the account id")
+    @Step("Select the account id")
     public void selectFromAccountId(){
         driver.findElement(fromAccountListBy).click();
         driver.findElement(fromAccountOptionBy).click();
@@ -58,26 +59,26 @@ public class BillPayPage extends BasePage {
         setAccountBalance();
     }
 
-//    @Step("Click on the send payment button")
+    @Step("Click on the send payment button")
     public BillPayPage clickSentPayment(){
         driver.findElement(sendPaymentBy).click();
         return this;
     }
 
-//  @Step("the completed message should be displayed")
+  @Step("the completed message should be displayed")
     public String checkPaymentResultMes(){
         wait.waitForVisibility(paymentResultBy);
         return driver.findElement(paymentResultMessageBy).getText();
     }
 
-//  @Step("Navigate to the overview page")
+    @Step("Navigate to the overview page")
     public OverviewPage backToOverview(){
         wait.waitForVisibility(paymentResultBy);
         driver.findElement(overviewButton).click();
         return new OverviewPage(driver);
     }
 
-//  @Step("Check that the account id deducted")
+//    @Step("Check that the account balance deducted")
     public boolean verifyBalanceUpdated(){
         return backToOverview()
                 .billAmountDeducted(

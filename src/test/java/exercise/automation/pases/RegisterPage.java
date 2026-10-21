@@ -3,6 +3,7 @@ package exercise.automation.pases;
 import com.github.javafaker.Faker;
 import exercise.automation.base.BasePage;
 import exercise.automation.utils.ConfigUtils;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -33,6 +34,7 @@ public class RegisterPage extends BasePage {
         super(driver);
     }
 
+    @Step("Fill registration form with valid data")
     public RegisterPage fillRegisterForm(){
         wait.waitForVisibility(registerFormLoaded);
 
@@ -61,6 +63,8 @@ public class RegisterPage extends BasePage {
         driver.findElement(password).sendKeys(getPass());
         driver.findElement(confirmPassword).sendKeys(getPass());
     }
+
+    @Step("Enter the submit button")
     public RegisterPage submitRegisterForm(){
         driver.findElement(submitRegisterButton).click();
         wait.waitForVisibility(successRegistration);
@@ -69,6 +73,7 @@ public class RegisterPage extends BasePage {
         return this;
     }
 
+    @Step("Check that the user is registered and success message is shown")
     public String checkSuccessRegistration(){
         return driver.findElement(successRegistration).getText();
     }
