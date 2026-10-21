@@ -41,7 +41,7 @@ public class BillPayTest extends BaseTest {
                 "Bill Payment completed message hasn't been displayed");
     }
 
-    @Test(priority = 2, description = "Check bill amount deducted")
+    @Test(priority = 2, description = "Check bill amount deduction")
     @Feature("Bill Pay Feature")
     @Description("Check that the bill amount has been deducted after completed payment")
     public void billAmountShouldBeDeductedAfterBillPayment(){

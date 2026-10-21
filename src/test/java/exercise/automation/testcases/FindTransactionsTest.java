@@ -27,7 +27,7 @@ public class FindTransactionsTest extends BaseTest {
         loginPage.loadApp().login(ConfigUtils.getInstance().getPassword());
     }
 
-    @Test(priority = 1,description = "Check all transactions")
+    @Test(priority = 1,description = "Check all transactions in the table")
     @Feature("Find Transactions Feature")
     @Description("Check that all transactions are shown successfully")
     public void AllTransactionsShouldShownSuccessfully(){
@@ -41,7 +41,7 @@ public class FindTransactionsTest extends BaseTest {
     @Test(priority = 2,description = "Check transactions description and type")
     @Feature("Find Transactions Feature")
     @Description("Check that transactions description and type shown correctly based on sender and receiver account")
-    public void AllTransactionDescriptionAndTypeShouldShownSuccessfully(){
+    public void transactionDescriptionAndTypeShouldShownSuccessfully(){
         boolean transactionsSenderType= overviewPage.clickFindTransButon()
                 .findByAmount("sender", "150")
                 .transDescriptionAndType("sender", "150");
@@ -52,5 +52,16 @@ public class FindTransactionsTest extends BaseTest {
                 .transDescriptionAndType("Receiver", "150");
         Assert.assertTrue(transactionsReceiverType, "Transactions Receiver account shown incorrectly");
 
+    }
+
+    @Test(priority = 3,description = "Check transaction details")
+    @Feature("Find Transactions Feature")
+    @Description("Check that transaction details for bill payment shown correctly")
+    public void transactionDetailsShouldShownSuccessfully(){
+        boolean transactionsDetails= overviewPage.clickFindTransButon()
+                .findByAmount("sender", "50")
+                .clickTransDetailsButton()
+                .isAllDetailShownCorrectly();
+        Assert.assertTrue(transactionsDetails, "Transaction details shown incorrectly");
     }
 }

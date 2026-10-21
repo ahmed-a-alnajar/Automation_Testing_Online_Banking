@@ -4,9 +4,13 @@ import exercise.automation.base.BasePage;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class FindTransactionsPage extends BasePage {
 
@@ -21,6 +25,12 @@ public class FindTransactionsPage extends BasePage {
     //Transactions Table
     By transTableBy= By.cssSelector("#transactionTable");
     By transTableDataBy= By.cssSelector("#transactionTable #transactionBody tr");
+    By transDetailsButton = By.cssSelector("#transactionBody tr td:nth-child(2) a");
+
+    //Transaction details
+    By transDetailsBy= By.cssSelector("#rightPanel .title");
+    By transDetailsDataBy= By.cssSelector("#rightPanel table tr");
+
 
     public FindTransactionsPage(WebDriver driver) {
         super(driver);
@@ -73,12 +83,10 @@ public class FindTransactionsPage extends BasePage {
      * * * Enter amount and submit
      * * * Check the transactions description shown correctly with sender and receiver accounts
      * * * Check the transactions type shown correctly with sender and receiver accounts
-     * */
+     */
 
     //    @Step("Enter amount and submit filtration")
     public FindTransactionsPage findByAmount(String accountType, String amount){
-//        driver.navigate().back();
-//        wait.waitForVisibility(selectAccountBy);
 
         if (accountType.equals("sender")){ selectAccount(accountSecondOptionBy);
         }else { selectAccount(accountFirstOptionBy);}
@@ -128,10 +136,64 @@ public class FindTransactionsPage extends BasePage {
                 );
     }
 
+    //Check transactions details screen
+//    @Step("Click on the transaction details button")
+    public FindTransactionsPage clickTransDetailsButton(){
+        wait.waitForVisibility(transTableDataBy);
+        driver.findElement(transDetailsButton).click();
+        return this;
+    }
+//    @Step("Check that all transaction details shown as expected")
+    public boolean isAllDetailShownCorrectly(){
+        wait.waitForVisibility(transDetailsDataBy);
+        Map<String, String> actualTransDetails= getTransactionDetails();
+        return isTransIdAndDateEmpty(actualTransDetails) && isTransDetailsMatched(actualTransDetails);
+    }
+
+
+
+
+
+
     public String todayDateFormate(){
         LocalDate today = LocalDate.now();
         DateTimeFormatter formateDate= DateTimeFormatter.ofPattern("MM-dd-yyyy");
         return today.format(formateDate);
+    }
+
+    //Check that the transaction ID and data isn't empty
+    public boolean isTransIdAndDateEmpty(Map<String, String> actualTransDetails){
+        return !actualTransDetails.get("Transaction ID").isEmpty()
+                && !actualTransDetails.get("Date").isEmpty();
+    }
+
+    //Check that the transactions details is match the expected value
+    public boolean isTransDetailsMatched(Map<String, String> actualTransDetails){
+        Map<String, String> expectedTransDetails = Map.of(
+                "Description", "Bill Payment to STC Comp",
+                "Type", "Debit",
+                "Amount", "$50.00"
+        );
+
+        return expectedTransDetails.entrySet()
+                .stream()
+                .allMatch(x -> x.getValue().equals(actualTransDetails.get(x.getKey())));
+    }
+
+    //Set Transactions details in a map
+    public Map<String, String> getTransactionDetails(){
+        Map<String, String> details= new HashMap<>();
+
+        List<WebElement> transDetailsData= driver.findElements(transDetailsDataBy);
+        for(WebElement transData: transDetailsData){
+            String transDetailName= transData.findElement(By.cssSelector("td:nth-child(1)"))
+                    .getText()
+                    .trim()
+                    .replace(":","");
+            String transDetailValue= transData.findElement(By.cssSelector("td:nth-child(2)")).getText();
+            details.put(transDetailName, transDetailValue);
+        }
+        return details;
     }
 
 
